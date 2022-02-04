@@ -3,3 +3,7 @@ declare global {
     ethereum?: any;
   }
 }
+
+export interface IContractsContext {
+  sendCoins: () => void;
+}
