@@ -1,5 +1,10 @@
 import { Container } from "./styles";
+import { useContracts } from "./hooks";
 
-const App = () => <Container>I'm the app</Container>;
+const App = () => {
+  const { sendCoins } = useContracts();
+
+  return <Container>I'm the app</Container>;
+};
 
 export default App;

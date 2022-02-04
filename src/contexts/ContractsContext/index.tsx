@@ -29,24 +29,26 @@ export const ContractsProvider: FunctionComponent = ({ children }) => {
   };
 
   const getContractAndSigner = async () => {
-    try {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contractWithProvider = new ethers.Contract(
-        tokenAddress,
-        Token.abi,
-        provider
-      );
-      const contractWithSigner = new ethers.Contract(
-        tokenAddress,
-        Token.abi,
-        signer
-      );
+    if (window.ethereum) {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contractWithProvider = new ethers.Contract(
+          tokenAddress,
+          Token.abi,
+          provider
+        );
+        const contractWithSigner = new ethers.Contract(
+          tokenAddress,
+          Token.abi,
+          signer
+        );
 
-      setContractWithProvider(contractWithProvider);
-      setContractWithSigner(contractWithSigner);
-    } catch (error) {
-      console.error(error);
+        setContractWithProvider(contractWithProvider);
+        setContractWithSigner(contractWithSigner);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
